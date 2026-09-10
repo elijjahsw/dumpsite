@@ -1,0 +1,33 @@
+/* Sets the dark background and monospace terminal font for the whole page */
+body {
+  background-color: #0f0f0f;
+  color: #d1d5db;
+  font-family: 'Courier New', Courier, monospace;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  line-height: 1.6;
+}
+
+/* Accent colors for your headers */
+h1, h3 {
+  color: #00ff66; /* Bright terminal green */
+  border-bottom: 1px solid #333; /* Clean subtle underline */
+  padding-bottom: 5px;
+}
+
+/* Style your navigation links */
+nav a {
+  color: #38bdf8; /* Soft blue for links */
+  text-decoration: none;
+  margin-right: 15px;
+}
+
+/* Hover effect when mouse touches a link */
+nav a:hover {
+  color: #00ff66;
+  text-decoration: underline;
+}
+html {
+  scroll-behavior: smooth;
+}
