@@ -12,13 +12,102 @@
 <main>
     <nav>
 <a href="index.html"> ME CORE</a>
-<a href="automation.html"> Automation</a>
+<a href="automation.html">Automation</a>
 <a href="school-stuff.html"> School Stuff</a>
 </nav>
-</main>
+    <nav>
+<section class="project-card">
+  <h3>LOG #01: ARDUINO LED CIRCUIT TEST</h3>
+  
+  <p>Now that that's been established, it's time to get into the physical side of things—specifically microcontrollers. Since recently getting setup, I've been experimenting with Arduino for about two weeks now, and man, it's been fun.</p>
+  
+  <!-- Component Specs -->
+  <ul class="specs">
+    <li><strong>Hardware:</strong> Arduino Uno, Solderless Breadboard, Blue LED, 220Ω Resistor</li>
+    <li><strong>Language:</strong> C++ / Arduino IDE</li>
+    <li><strong>Status:</strong> Passed</li>
+  </ul>
 
-        </header>
-    <p> </p>
+  <!-- Styled Photo Block -->
+  <div class="photo-container">
+    <img src="images/first.jpg" alt="Arduino Breadboard Test" class="terminal-img">
+    <p class="caption"><em>Fig 1.1 — Basic digital write test driving an LED on the breadboard 25/08/26.</em></p>
+  </div>
+
+  <!-- Code Snippet -->
+  <h4>// Test Script</h4>
+  <pre><code>void setup() {
+  pinMode(13, OUTPUT);
+}
+
+void loop() {
+  digitalWrite(13, HIGH);
+  delay(500);
+  digitalWrite(13, LOW);
+  delay(500);
+}</code></pre>
+</section>
+<br>
+
+<section class="project-card">
+<h3>LOG #2: ARDUINO ANALOG WRITE ANALYSIS</h3>
+<p> The purpose of this exercise was to measure the voltage using a DMM while changing
+    the amount of voltage the specific spins recieved using analogWrite. Thid one had some troubleshooting hence the code and wiring changed
+     frequently, unfortunately I won't be able to put all.
+</p>
+
+<ul class="specs">
+<li> <strong>Hardware</strong>: Arduino Uno, Solderless BreadBoard, LED2x, 220Ω Resistor 2x</li>
+<li><strong>Language</strong>: C++ / Arduino IDE</li>
+<li><strong>Status:</strong> Failed (Resolved)</li>
+</ul>
+
+<div class="image-grid grid-2">
+    <img src="images/secound.jpg" alt="circuit">
+    <img src="images/11code.jpg" alt="voltage falue between ">
+    <p class="caption"><em>Fig 1.2 Displays the circuit, as you've noticed, 
+        only the blue LED is releasing photons, that's due to a multitude of 
+    problems. Fig 1.3 Shows the value of the DMM, it's 0 volts, initially I got 
+a negative value which lead me to believe that the LED was reversed biased.
+Didn't apper to be the case but i changed it anyway, got 0mvolts afterwards. Probably
+ an half hour later I figured out that specific spins on the arduino allows the analogWwite
+command and the power rails don't actually run all the way down, WE WERE LIED TOO!!
+</em></p>
+
+<br>
+<strong> Resolved Circuit</strong>
+
+ <img src="images/complete2.jpg" alt="completed circuit">
+    <img src="images/secound2.jpg" alt="voltage falue between ">
+</div>
+<p class="caption"><em>  Fig 1.5 Shows the voltage value for the read 
+    LED, was about 180 on the computer, the red LED was equipted with a 10kohm resistor.
+</em></p>
+
+
+<h4>// Test Script</h4>
+  <pre><code>
+    int x= 11;
+    int y=10;
+    int t=200;
+    int r=200;
+    void setup() {
+  pinMode(x, OUTPUT);
+  pinMode(y, OUTPUT);
+}
+
+void loop() {
+  analogWrite(x,t);
+  analogWrite(y,r);
+}</code></pre>
+
+
+
+</section>
+
+
+
+
         
 
     </body>
