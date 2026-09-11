@@ -31,3 +31,82 @@ nav a:hover {
 html {
   scroll-behavior: smooth;
 }
+/* Image styling with terminal border */
+.terminal-img {
+  max-width: 100%;
+  height: auto;
+  border: 1px solid #30363d;
+  border-radius: 4px;
+}
+
+.caption {
+  font-size: 0.85rem;
+  color: #8b949e;
+  margin-top: 6px;
+}
+
+/* Monospace code block */
+pre {
+  background-color: #0d1117;
+  border: 1px solid #30363d;
+  padding: 12px;
+  border-radius: 4px;
+  overflow-x: auto;
+  color: #00ff66;
+}
+
+.project-card img {
+  max-width: 500px;
+  width: 100%;
+  border: 1px solid #30363d;
+  border-radius: 4px;
+  margin-top: 10px;
+}
+
+/* Base container for all multi-image layouts */
+.image-grid {
+  display: grid;
+  gap: 12px;
+  margin: 15px 0;
+}
+
+/* Base image styling inside grids */
+.image-grid img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  border: 1px solid #30363d;
+  border-radius: 4px;
+}
+
+/* 1. Layout for 2 Images (Side by Side) */
+.grid-2 {
+  grid-template-columns: repeat(2, 1fr);
+}
+
+/* 2. Layout for 3 Images (2 on top, 1 centered bottom) */
+.grid-3 {
+  grid-template-columns: repeat(2, 1fr);
+}
+.grid-3 img:nth-child(3) {
+  grid-column: span 2;
+  max-width: 60%;
+  justify-self: center;
+}
+
+/* 3. Layout for 4 Images (2 on top, 2 on bottom) */
+.grid-4 {
+  grid-template-columns: repeat(2, 1fr);
+}
+
+/*Stacks images vertically on small screens */
+@media (max-width: 600px) {
+  .grid-2, .grid-3, .grid-4 {
+    grid-template-columns: 1fr;
+  }
+  .grid-3 img:nth-child(3) {
+    grid-column: span 1;
+    max-width: 100%;
+  }
+}
+
