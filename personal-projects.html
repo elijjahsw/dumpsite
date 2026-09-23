@@ -22,15 +22,15 @@
   <p>Now that that's been established, it's time to get into the physical side of things—specifically microcontrollers. Since recently getting setup, I've been experimenting with Arduino for about two weeks now, and man, it's been fun.</p>
   
   <!-- Component Specs -->
-  <ul class="specs">
+  <ul>
     <li><strong>Hardware:</strong> Arduino Uno, Solderless Breadboard, Blue LED, 220Ω Resistor</li>
     <li><strong>Language:</strong> C++ / Arduino IDE</li>
     <li><strong>Status:</strong> Passed</li>
   </ul>
 
   <!-- Styled Photo Block -->
-  <div class="photo-container">
-    <img src="images/first.jpg" alt="Arduino Breadboard Test" class="terminal-img">
+  <div>
+    <img src="images/first.jpg" alt="Arduino Breadboard Test" class="grid">
     <p class="caption"><em>Fig 1.1 — Basic digital write test driving an LED on the breadboard 25/08/26.</em></p>
   </div>
 
@@ -56,15 +56,16 @@ void loop() {
      frequently, unfortunately I won't be able to put all.
 </p>
 
-<ul class="specs">
+<ul>
 <li> <strong>Hardware</strong>: Arduino Uno, Solderless BreadBoard, LED2x, 220Ω Resistor 2x</li>
 <li><strong>Language</strong>: C++ / Arduino IDE</li>
 <li><strong>Status:</strong> Failed (Resolved)</li>
 </ul>
 
-<div class="image-grid grid-2">
-    <img src="images/secound.jpg" alt="circuit">
-    <img src="images/11code.jpg" alt="voltage falue between ">
+<div>
+    <img src="images/secound.jpg" alt="circuit" class="grid">
+    <img src="images/11code.jpg" alt="voltage falue between" class="grid">
+    </div>
     <p class="caption"><em>Fig 1.2 Displays the circuit, as you've noticed, 
         only the blue LED is releasing photons, that's due to a multitude of 
     problems. Fig 1.3 Shows the value of the DMM, it's 0 volts, initially I got 
@@ -76,9 +77,9 @@ command and the power rails don't actually run all the way down, WE WERE LIED TO
 
 <br>
 <strong> Resolved Circuit</strong>
-
- <img src="images/complete2.jpg" alt="completed circuit">
-    <img src="images/secound2.jpg" alt="voltage falue between ">
+<div>
+ <img src="images/complete2.jpg" alt="completed circuit" class="grid">
+    <img src="images/secound2.jpg" alt="voltage falue between" class="grid">
 </div>
 <p class="caption"><em>  Fig 1.5 Shows the voltage value for the read 
     LED, was about 180 on the computer, the red LED was equipted with a 10kohm resistor.
@@ -101,14 +102,102 @@ void loop() {
   analogWrite(y,r);
 }</code></pre>
 
-
-
 </section>
 
 
+<section class="project-card">
+<h3>LOG #3: ARDUINO ANALOG READ ANALYSIS</h3>
+<p>This exercise was used to replace the use of the DMM and to allow
+  the Arduino to display the voltages on the serial monitor on the Adruino IDE.
+</p>
+<ul>
+<li><strong>Hardware:</strong>Arduino Uno, Solderless Breadboard and 220Ω Resistor 2x</li>
+<li><strong>Language:</strong>C++ / Arduino IDE</li>
+<li><strong>Status:</strong>Passed</li>
+</ul>
+</section>
+<div>
+<img src="images/analog1.jpg" alt="circuit" class="grid">
+</div>
+        <p class="caption"><en>There really isn't much to show here, so here's an explination of what's going on.
+          The Arduino Uno hardarwe uses a 10-bit ADC to sample incoming
+           analog voltage. A 10-bit resolution provides 1023 discrete levels (0-1023), scaling
+            inputs from '0' (0v) to '1023' (5v). The value printed on the Serial Monitor is the 
+            representation of the 10-bit integer reading. A raw reading of '511' represents approximately
+            half scale calculated via the linear conversation formula.
+        </en></p>
+
+        <h4>// Test Script</h4>
+  <pre><code>
+    int pin= A3;
+    int A=0;
+    float b =0;
+    float y=0;
+    void setup() {
+  pinMode(pin, INPUT);
+  Serial.begin(9600);
+}
+
+void loop() {
+  b=analogRead(pin);
+  Serial.println(b);
+  delay(2000);
+  y= b* (5./1023.);
+  Serial.println(y);
+  delay(500);
+}</code></pre>
 
 
-        
+<section class="project-card">
+<h3>LOG #4: ARDUINO IF STATEMENT VERIFICATION</h3>
+<p>This exercise was used to verify conditional threshold logic in C++,
+   turning an output pin HIGH or LOW based on measured analog voltage levels.
+</p>
+<ul>
+<li><strong>Hardware:</strong>Arduino Uno, Solderless Breadboard, 220Ω Resistor 2x, 10,000Ω Resistor and blue LED</li>
+<li><strong>Language:</strong>C++ / Arduino IDE</li>
+<li><strong>Status:</strong>Passed</li>
+</ul>
+</section>
+<div>
+<img src="images/if-stat.jpg" alt="circuit" class="grid">
+</div>
+<br>
+<iframe width="100%" height="315" src="https://www.youtube.com/embed/DBc_nmB3izs" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+ 
+        <p class="caption"><en>
+        </en></p>
+
+        <h4>// Test Script</h4>
+  <pre><code>
+    int x=A2;
+int b=0;
+int pin=3;
+float volt=0;
+
+    void setup() {
+  pinMode(x,INPUT);
+pinMode(pin,OUTPUT);
+Serial.begin(9600);
+}
+
+void loop() {
+  b=analogRead(x);
+  volt=b* (5./1023.);
+  Serial.println(volt);
+  delay(500);
+  if(volt>3.00){
+    digitalWrite(pin,HIGH);
+    }
+    else{
+      digitalWrite(pin,LOW);
+      }
+
+    }
+    </code></pre>
+  </section>
+
+
 
     </body>
 </html>
