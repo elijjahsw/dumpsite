@@ -64,7 +64,7 @@ void loop() {
 
 <div>
     <img src="images/secound.jpg" alt="circuit" class="grid">
-    <img src="images/11code.jpg" alt="voltage falue between" class="grid">
+    <img src="images/11code.jpg" alt="voltage value between" class="grid">
     </div>
     <p class="caption"><em>Fig 1.2 Displays the circuit, as you've noticed, 
         only the blue LED is releasing photons, that's due to a multitude of 
@@ -79,11 +79,12 @@ command and the power rails don't actually run all the way down, WE WERE LIED TO
 <strong> Resolved Circuit</strong>
 <div>
  <img src="images/complete2.jpg" alt="completed circuit" class="grid">
-    <img src="images/secound2.jpg" alt="voltage falue between" class="grid">
+    <img src="images/secound2.jpg" alt="voltage value between" class="grid">
 </div>
 <p class="caption"><em>  Fig 1.5 Shows the voltage value for the read 
     LED, was about 180 on the computer, the red LED was equipted with a 10kohm resistor.
 </em></p>
+<iframe width="100%" height="315" src="https://www.youtube.com/embed/nFGPp9eX2og" frameborder="0" allowfullscreen></iframe>
 
 
 <h4>// Test Script</h4>
@@ -119,12 +120,12 @@ void loop() {
 <div>
 <img src="images/analog1.jpg" alt="circuit" class="grid">
 </div>
-        <p class="caption"><en>There really isn't much to show here, so here's an explination of what's going on.
-          The Arduino Uno hardarwe uses a 10-bit ADC to sample incoming
+        <p class="caption"><en>There really isn't much to show here, so here's an explanation of what's going on.
+          The Arduino Uno hardware uses a 10-bit ADC to sample incoming
            analog voltage. A 10-bit resolution provides 1023 discrete levels (0-1023), scaling
             inputs from '0' (0v) to '1023' (5v). The value printed on the Serial Monitor is the 
             representation of the 10-bit integer reading. A raw reading of '511' represents approximately
-            half scale calculated via the linear conversation formula.
+            half scale calculated via the linear conversion formula.
         </en></p>
 
         <h4>// Test Script</h4>
@@ -165,7 +166,10 @@ void loop() {
 <br>
 <iframe width="100%" height="315" src="https://www.youtube.com/embed/DBc_nmB3izs" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
  
-        <p class="caption"><en>
+        <p class="caption"><en>As the same as last time, this is more of me demonstrating conditional hardware
+          control. Basically the Arduino samples the input state and evaluates it against a defined threshold.
+          When the condition is TRUE(1), it triggers a state change on pin 6, supplying 5 volts to drive the LED
+          circuit until the condition is FALSE(0).
         </en></p>
 
         <h4>// Test Script</h4>
@@ -195,6 +199,53 @@ void loop() {
 
     }
     </code></pre>
+  </section>
+
+  <section class="project-card">
+    <h3>LOG #5: CONTROL FLOW-FOR VS WHILE LOOPS</h3>
+    <p>Implementing C++ control flow structures(for and while loops) to excute iterative
+      logic control digital output states(LEDs) based on incremented counter thersholds.
+    </p>
+    <h4 style="background-color: blue;">FOR LOOP</h4>
+    <ul>
+    <li><strong>HARDWARE:</strong>Arduino Uno, Solderless Breadboard, 220Ω Resistor 2x, red and yellow LED</li>
+    <li><strong>LANGUAGE:</strong>C++ / Arduino IDE</li>
+    <li><strong>STSTUS:</strong>Passed</li>
+    </ul>
+    <div>
+      <img src="images/for-loop.jpg" alt="circuit" class="grid">
+    </div>
+    <br>
+    <iframe width="100%" height="315" src="https://www.youtube.com/embed/7DGoRAgDjUw" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    <p class="caption"><en>Demonstrating deterministic iteration in C++ using a for loop. Unlike condition-driven
+       execution, the for loop initializes a counter variable, evaluates a termination condition, and executes
+        an increment step per iteration. This allows the micro-controller to run a precise, predefined number of
+         output cycles—such as blinking an LED or pulsing a pin sequence—without relying on external sensor input
+          to break the execution block.</em></p>
+</en></p>
+
+    <br>
+
+
+    <h4 style="background-color: brown;">WHILE LOOP</h4>
+    <ul>
+      <li><strong>HARDWARE:</strong>Arduino Uno, Solderless Breadboard, 220Ω Resistor, and red LED</li>
+      <li><strong>LANGUAGE:</strong>C++, Arduino IDE</li>
+      <li><strong>STATUS:</strong>Passed</li>
+    </ul>
+    <div>
+      <img src="images/cd-off.jpg" alt="circuit-1" class="grid">
+      <img src="images/cd-on.jpg" alt="circuit-2" class="grid">
+    </div>
+    <br>
+        <iframe width="100%" height="315" src="https://www.youtube.com/embed/X93dzQ74K1g" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        <p class="caption"><en><p class="caption"><em>Demonstrating condition-driven iteration in C++ using a while loop.
+           Unlike a deterministic for loop, execution continues indefinitely as long as the relational expression
+            evaluates to TRUE. The micro-controller executes the loop body and updates the evaluation variable internally on
+             each cycle, maintaining an output state until the test condition breaks.</em></p>
+</en></p>
+
+
   </section>
 
 
