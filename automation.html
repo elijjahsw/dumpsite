@@ -15,6 +15,36 @@
 <a href="personal-projects.html"> Personal Projects</a>
 <a href="school-stuff.html"> School Stuff</a>
 </nav>
+<section class="project-card">
+    <h3>Forward/Reverse Interlocking Circuit</h3>
+    <ul class="project specs">
+        <li><strong>Platform:</strong> OpenPLC Editor (IEC 61131-3 Standard)</li>
+        <li><strong>Language:</strong> Ladder Logic (LD)</li>
+        <li><strong>Application:</strong> Bidirectional 3-Phase Motor Control</li>
+    </ul>
+    <img src="images/fwd_rev.jpg" alt="Forward/Reverse Circuit" class="project-card-img">
+    <iframe width="100%" height="315" src="https://www.youtube.com/embed/nvL92ya6iq4" frameborder="0" allowfullscreen></iframe>
+
+    <p><strong>Circuit Logic & Protection</strong></p>
+    <ul>
+        <li>
+            <strong>Software Interlocking:</strong> Included NC contacts cross-interlocking
+            (<code>motor_rev</code> on forward rung;<code>motor_fwd</code> on reverse rung)
+            to prevent simultaneous coil energization and phase shorts.
+        </li>
+    
+    <li>
+
+    <strong>Latching (Seal-in Circuit):</strong> Implemented parallel auxiliary contact logic
+    around momentary <code>startF_btn</code> and <code>startR_btn</code> inputs to maintain hold-in.
+    </li>
+    <li>
+
+    <strong>Fault & Safety Interruption:</strong> Master series placement for <code>ol_btn</code>
+    and <code>stop_btn</code> to instantly drop out output coils under fault conditions.
+    </li>
+    </ul>
+</section>
 
 
 </main>

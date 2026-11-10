@@ -30,7 +30,7 @@
 
   <!-- Styled Photo Block -->
   <div>
-    <img src="images/first.jpg" alt="Arduino Breadboard Test" class="grid">
+    <img src="images/first.jpg" alt="Arduino Breadboard Test" class="project-card-img">
     <p class="caption"><em>Fig 1.1 — Basic digital write test driving an LED on the breadboard 25/08/26.</em></p>
   </div>
 
@@ -63,8 +63,8 @@ void loop() {
 </ul>
 
 <div>
-    <img src="images/secound.jpg" alt="circuit" class="grid">
-    <img src="images/11code.jpg" alt="voltage value between" class="grid">
+    <img src="images/secound.jpg" alt="circuit" class="project-card-img">
+    <img src="images/11code.jpg" alt="voltage value between" class="project-card-img">
     </div>
     <p class="caption"><em>Fig 1.2 Displays the circuit, as you've noticed, 
         only the blue LED is releasing photons, that's due to a multitude of 
@@ -77,13 +77,6 @@ command and the power rails don't actually run all the way down, WE WERE LIED TO
 
 <br>
 <strong> Resolved Circuit</strong>
-<div>
- <img src="images/complete2.jpg" alt="completed circuit" class="grid">
-    <img src="images/secound2.jpg" alt="voltage value between" class="grid">
-</div>
-<p class="caption"><em>  Fig 1.5 Shows the voltage value for the read 
-    LED, was about 180 on the computer, the red LED was equipted with a 10kohm resistor.
-</em></p>
 <iframe width="100%" height="315" src="https://www.youtube.com/embed/nFGPp9eX2og" frameborder="0" allowfullscreen></iframe>
 
 
@@ -107,147 +100,369 @@ void loop() {
 
 
 <section class="project-card">
-<h3>LOG #3: ARDUINO ANALOG READ ANALYSIS</h3>
-<p>This exercise was used to replace the use of the DMM and to allow
-  the Arduino to display the voltages on the serial monitor on the Adruino IDE.
+<h3>LOG #3:Light-Threshold Alarm System</h3>
+<p>This exercise demonstrated the pratical use of an active buzzer and photoresistor. The circuit demonstartes the 
+  use of the photoresistor by combining it with an active buzzer and two LEDs. Under normal conditions, the red LED is on continously,
+  when the photoresistor's value passes it's perdetermined value, the buzzer activates and the other LED turns on.
 </p>
 <ul>
-<li><strong>Hardware:</strong>Arduino Uno, Solderless Breadboard and 220Ω Resistor 2x</li>
-<li><strong>Language:</strong>C++ / Arduino IDE</li>
-<li><strong>Status:</strong>Passed</li>
+  <li><strong>Hardware: </strong>Breadboard, active buzzer, photoresistor, LEDs2x, resistor3x(2202x,10k)</li>
+  <li><strong>Lanuguage: </strong>C++ / Arduino IDE</li>
+  <li><strong>Status: </strong> Passed</li>
 </ul>
-</section>
 <div>
-<img src="images/analog1.jpg" alt="circuit" class="grid">
+  <img src="images/buzzerb.jpg" alt="circuit" class="project-card-img">
 </div>
-        <p class="caption"><en>There really isn't much to show here, so here's an explanation of what's going on.
-          The Arduino Uno hardware uses a 10-bit ADC to sample incoming
-           analog voltage. A 10-bit resolution provides 1023 discrete levels (0-1023), scaling
-            inputs from '0' (0v) to '1023' (5v). The value printed on the Serial Monitor is the 
-            representation of the 10-bit integer reading. A raw reading of '511' represents approximately
-            half scale calculated via the linear conversion formula.
-        </en></p>
+<iframe width="100%" height="315" src="https://www.youtube.com/embed/1M6Q2GPWPqw" frameborder="0" allowfullscreen></iframe>
+<p class="caption">
+    Fig 1.3 This circuit was relatively easy to construct so there wasn't much troubleshooting. Incase you didn't
+    know, the LDR's resisor value isn't fixed, it changes based on ambient light. In total darkness, it's resistance can go all the way
+     up to 1M(mggaohm) or higher. Under bring light, it's value can drop to 1k or less. 10kohm is generally considered the sweet spot based
+     on a couple calculations, all of which I won't show as of now.
+  </p>
 
-        <h4>// Test Script</h4>
+  <h4>// Test Script</h4>
+  <details>
+    <summary><strong>Click to view full C++ code snippet</strong></summary>
+    <p>Code logic</p>
   <pre><code>
-    int pin= A3;
-    int A=0;
-    float b =0;
-    float y=0;
+    int pin=A4;
+    int pin2=5;
+    int pin3=9;
+    int pin4=11;
+    int delayt=500;
+    int value;
     void setup() {
-  pinMode(pin, INPUT);
-  Serial.begin(9600);
+      Serial.brgin(9600);
+      pinMode(pin,INPUT);
+      pinMode(pin2,OUTPUT);
+      pinMode(pin3,OUTPUT);
+      pinMode(pin4,OUTPUT);
 }
 
 void loop() {
-  b=analogRead(pin);
-  Serial.println(b);
-  delay(2000);
-  y= b* (5./1023.);
-  Serial.println(y);
-  delay(500);
+value=analogRead(pin);
+Serial.println(value);
+delay(delayt);
+if(value>600){
+  digitalWrite(pin2,HIGH);
+}
+else{
+  digitalWrite(pin2,LOW);
+}
+if(value<600){
+  digitalWrite(pin3,HIGH);
+  digitalWrite(pin4,HIGH);
+}
+else{
+  digitalWrite(pin3,LOW);
+  difitalWrite(pin4,LOW);
+}
 }</code></pre>
-
+</details>
 
 <section class="project-card">
-<h3>LOG #4: ARDUINO IF STATEMENT VERIFICATION</h3>
-<p>This exercise was used to verify conditional threshold logic in C++,
-   turning an output pin HIGH or LOW based on measured analog voltage levels.
-</p>
-<ul>
-<li><strong>Hardware:</strong>Arduino Uno, Solderless Breadboard, 220Ω Resistor 2x, 10,000Ω Resistor and blue LED</li>
-<li><strong>Language:</strong>C++ / Arduino IDE</li>
-<li><strong>Status:</strong>Passed</li>
-</ul>
-</section>
-<div>
-<img src="images/if-stat.jpg" alt="circuit" class="grid">
-</div>
-<br>
-<iframe width="100%" height="315" src="https://www.youtube.com/embed/DBc_nmB3izs" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
- 
-        <p class="caption"><en>As the same as last time, this is more of me demonstrating conditional hardware
-          control. Basically the Arduino samples the input state and evaluates it against a defined threshold.
-          When the condition is TRUE(1), it triggers a state change on pin 6, supplying 5 volts to drive the LED
-          circuit until the condition is FALSE(0).
-        </en></p>
+  <h3>LOG #4: Adaptive Light-Tracking Servo System with Multi-State Feedback</h3>
+  <p>
+    This circuit is designed to process continious analog light intensity measurments and drive
+    target position control via a servo actuator. It evaluates photoresistive voltage changes across present
+     thresholds, mapping specific light levels to proportional servo positions, status LEDs and an alarm system.
+  </p>
 
-        <h4>// Test Script</h4>
-  <pre><code>
-    int x=A2;
-int b=0;
-int pin=3;
-float volt=0;
-
+  <ul>
+    <li><strong>Hardware: </strong>Breadboard, active buzzer, servo, LDR sensor, LEDs3x and resistors4x</li>
+    <li><strong>Language: </strong>C++ / Arduino IDE</li>
+    <li><strong>Status: </strong>Failed</li>
+  </ul>
+  <iframe width="100%" height="315" src="https://www.youtube.com/embed/DKvLD7ImSqY" frameborder="0" allowfullscreen></iframe>
+  <p class="caption">The wiring for this one wasn't much to complain about, the buzzer failed because I had 
+    used the incorrect arduino pin which means I wasn't getting the desired boolen value. The servos I used in this build was
+     the sg90 type which allows for accurate and percise movemnt at set angles(0-180). With this one some stuff wasn't working
+      in the code like the integar values for the servo, pretty odd.
+  </p>
+  <h4>// Test Script</h4>
+  <details>
+    <summary><strong>Click to view full C++ code snippet</strong></summary>
+    <p>Code Logic</p>
+    <pre><code>
+    #include <Servo.h>
+    int servopos=0;
+    int serpos1=45;
+    int servopos2=90;
+    int servopos3=180;
+    int servopin=2;
+    Servo child;
+    int buz=4;
+    int red=9;
+    int blue=6;
+    int yellow=11;
+    int delayt=500;
+    int pint=A4;
+    int value;
     void setup() {
-  pinMode(x,INPUT);
-pinMode(pin,OUTPUT);
-Serial.begin(9600);
+      //put your setup code here, to run code;
+      Serial.brgin(9600);
+      pinMode(servopin,OUTPUT);
+      pinMode(red,OUTPUT);
+      pinMode(blue,OUTPUT);
+      pinMode(yellow,OUTPUT);
+      pinMode(buz,OUTPUT);
+      child.attach(servopin);
 }
 
 void loop() {
-  b=analogRead(x);
-  volt=b* (5./1023.);
-  Serial.println(volt);
-  delay(500);
-  if(volt>3.00){
-    digitalWrite(pin,HIGH);
-    }
-    else{
-      digitalWrite(pin,LOW);
-      }
+  //put your main code here to run repeatedly;
+value=analogRead(pint);
+Serial.println(value);
+digitalWrite(red,LOW);
+digitalWrite(blue,LOW);
+digitalWrite(yellow,LOW);
+digitalWrite(buz,LOW);
+if(value<200){
+  child.write(servopos);
+}
+if(value>=200 && value<500){
+  child.write(45);
+  difitalWrite(red,HIGH);
+}
+else if(value>500 && value<700){
+  child.write(90);
+  digitalWrite(yellow,HIGH);
+}
+else if(value>700 && value<1024){
+  child.write(servopos3);
+  digitalWrite(blue,HIGH);
+  dogitalWrite(buz,HIGH);
+}
 
-    }
-    </code></pre>
-  </section>
+
+}</code></pre>
+
+  </details>
+</section>
+
+<section class="project-card">
+  <h3>LOG #5: 2-Axis Pan-and-Tilt Servo Gigmal (Joystick HMI)</h3>
+  <p>Designed and built a dual-axis mechatronic control system driven by an Arduino microcontroller.
+     The system fetures an analog 2-axis joystick acting asn a Human Machine Interface (HMI) to command 
+    independant pan-and-tilt servo motors in real time, paired with an integrated peizo buzzer for state feed-back. </p>
+    <ul>
+      <li><strong>Hardware: </strong>Breadboard, active buzzer, sevos2x, and joystick</li>
+      <li><strong>Language: </strong>C++ / Arduino IDE</li>
+      <li><strong>Stataus: </strong>Passed</li>
+    </ul>
+      <iframe width="100%" height="315" src="https://www.youtube.com/embed/PPpWAhyC7lE" frameborder="0" allowfullscreen></iframe>
+      <p class="caption">
+        I origially intended to construct a mini crance mechanism with this setup but lacked the mounting hardware to couple
+         the servos. The control systems interfaces an analog joystick with dual PWM servos using scaled coordinate mapping. 
+         Durning initial testing, only the y-axis servo responded to joystick displacement. To isolate the issue, I printed the raw
+          ADC voltage readings for both axis to the Serial Monitor. The matching continous outputs eliminated physical faults,
+           such as loose jumper wires, bad breadboard terminals or a dead potentiometer tracks. After verifying the hardware layer
+            I innspected the code structure and identified a variable mismatch: the x-axis servo object was not properly decleared
+             in the main execution block. Correcting this instance restored synchronized dual-axis response.
+
+      </p>
+      <h4>// Test Script</h4>
+      <details>
+        <summary>Click to view fukk C++ code snippet</summary>
+        <p>Code logic</p>
+        <pre><code>
+          #include <Servo.h>
+Servo child;
+Servo child2;
+int xCoordinate;
+int yCoordinate;
+int xval;
+int yval;
+int sval;
+int sw=2;
+int xpin=A0;
+int ypin=A2;
+int servopin=4;
+int servopin2=3;
+int servopos;
+int servopos2;
+int buz=11;
+int dt=200;
+void setup() {
+ //put your setup code here, to run code;
+ Serial.begin(9600);
+ child.attach(servopin);
+ child2.attach(servopin2);
+ pinMode(servopin,OUTPUT);
+ pinMode(servopin2,OUTPUT);
+ pinMode(sw,INPUT_PULLUP);
+ pinMode(xpin,INPUT);
+ pinMode(ypin,INPUT);
+ pinMode(buz,OUTPUT);
+}
+
+
+void loop() {
+ //put your main code here to run repeatedly;
+xval=analogRead(xpin);
+yval=analogRead(ypin);
+sval=digitalRead(sw);
+xCoordinate=(180./1023)*xval;
+yCoordinate=(180./1023)*yval;
+Serial.println(xval);
+Serial.println(yval);
+Serial.print("xCoordinate= ");
+Serial.println(xCoordinate);
+Serial.print("yCoordinate= ");
+Serial.println(yCoordinate);
+Serial.print("Switch Position= ");
+Serial.println(sval);
+child2.write(xCoordinate);
+child.write(yCoordinate);
+if(sval==1){
+  digitalWrite(buz,LOW);
+}
+else if(sval==0){
+  digitalWrite(buz,HIGH);
+}
+delay(dt);
+}
+        </code></pre>
+      </details>
 
   <section class="project-card">
-    <h3>LOG #5: CONTROL FLOW-FOR VS WHILE LOOPS</h3>
-    <p>Implementing C++ control flow structures(for and while loops) to excute iterative
-      logic control digital output states(LEDs) based on incremented counter thersholds.
+    <h3>LOG #6: Bidirectional Stepper Motor Control System</h3>
+    <p>Demonstrating bidirectional rotation of a stepper motor with the help of a pushbutton. Unlike continous DC motos or 
+      fixed sweep servo motors, a stepper motor rotates through discreat micro-steps controlled via microcontrollerdriber board 
+      allowing exact repeatability and position verification trhough sequential pulse trains. Directional logic and motion 
+      states are toggled via a physical interface pushbutton.
     </p>
-    <h4 style="background-color: blue;">FOR LOOP</h4>
     <ul>
-    <li><strong>HARDWARE:</strong>Arduino Uno, Solderless Breadboard, 220Ω Resistor 2x, red and yellow LED</li>
-    <li><strong>LANGUAGE:</strong>C++ / Arduino IDE</li>
-    <li><strong>STSTUS:</strong>Passed</li>
+      <li><strong>Hardware: </strong>BreadBoard, stepper motor, motor driver, and pushbutton</li>
+      <li><strong>Language: </strong>C++ / Arduino IDE</li>
+      <li><strong>Status: </strong>Passed</li>
     </ul>
-    <div>
-      <img src="images/for-loop.jpg" alt="circuit" class="grid">
-    </div>
-    <br>
-    <iframe width="100%" height="315" src="https://www.youtube.com/embed/7DGoRAgDjUw" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-    <p class="caption"><en>Demonstrating deterministic iteration in C++ using a for loop. Unlike condition-driven
-       execution, the for loop initializes a counter variable, evaluates a termination condition, and executes
-        an increment step per iteration. This allows the micro-controller to run a precise, predefined number of
-         output cycles—such as blinking an LED or pulsing a pin sequence—without relying on external sensor input
-          to break the execution block.</em></p>
-</en></p>
+    <iframe width="100%" height="315" src="https://www.youtube.com/embed/_CXN0sLYaag" frameborder="0" allowfullscreen></iframe>
+    <p class="caption">
+      This was a straightforward build focused on digital input handling a step-sequence control. Bidirectional control of the stepper 
+      motot was achived by interfacing a tatical pushbutton with the microcontroller, the softwre logic samples the button state to 
+      toggle the step sequence direction continously upon each trigger event.
+    </p>
+    <h4>// Test Script</h4>
+    <details>
+      <summary>Click to view full C++ code snippet</summary>
+      <p>Code logic</p>
+      <code><pre>
+      #include <Stepper.h>
+        int stepsPerResolution=2048;
+        Stepper motor(stepsPerResolution,8,10,9,11);
+        int speed=10;
+        int dt=5;
+        int pin=2;
+        int buo;
+        int bun;
+        int myMotor=1;
 
-    <br>
+        void setup(){
+          Serial.begin(9600);
+          motor.setSpeed(speed);
+          pinMode(pin,INPUT_PILLUP);
+        }
+
+        void loop(){
+          bun=analogRead(pin);
+          if(bun==1 && buo==0){
+            myMotor=myMotor*(-1)
+          }
+          motor.step(myMotor*1);
+          bun=buo;
+        }
+      </pre></code>
+    </details>
+
+  </section> 
+
+  <section class="project-card">
+  <h3>LOG #7: Transistor DC Motor Switch with Flyback Diode</h3>
+  <p> Low-voltage microcontroller switching of an inductive load, featuring flyback diode protection to clamp back-EMF 
+    transient voltage spikes.
+  </p>
+  <ul>
+    <li><strong>Hardware: </strong>DC motor, flyback diode, transistor, power supply module and 9V battery</li>
+    <li><strong>Language: </strong>C++ / Arduino IDE</li>
+    <li><strong>Status: </strong>Passed</li>
+  </ul>
+  <iframe width="100%" height="315" src="https://www.youtube.com/embed/BCuI1XBsNZQ" frameborder="0" allowfullscreen></iframe>
+  <p class="caption">
+    Had to use the conventional method of setup because I lacked the motor driver to run this motor. A 2N2222 NPN transistor was
+    configured as a low-side solid-state switch to drive the  DC motor. To protect the circuit from inductive kickback (back-EMF) which
+    occurs when the motor's collapsing magnetic field releases stored energy upon de-energization a, flyback diode was wired in
+    reverse bias across the motor terminals. This provides a safe recirculation path for the high-voltage spike, preventing damage to
+    the transistor and microcontroller.
+  </p>
+  <h4>// Test Script</h4>
+  <details>
+    <summary>Click to view full C++ code snippet</summary>
+    <p>Code logic</p>
+    <pre><code>
+      int motorPin=6;
+int speed=100;
+int speed1=0;
+int tilts=2;
+int tilt;
+int green=3;
+int blue=8;
+int dt=200;
+int troublePin=A2;
+int trouble;
+int collector=A1;
+int collect;
+int trouble2=A4;
+int vo;
+void setup() {
+  // put your setup code here, to run once:
+Serial.begin(9600);
+pinMode(tilts,INPUT_PULLUP);
+pinMode(green,OUTPUT);
+pinMode(blue,OUTPUT);
+pinMode(troublePin,INPUT);
+pinMode(collector,INPUT);
+pinMode(trouble2,INPUT);
+}
 
 
-    <h4 style="background-color: brown;">WHILE LOOP</h4>
-    <ul>
-      <li><strong>HARDWARE:</strong>Arduino Uno, Solderless Breadboard, 220Ω Resistor, and red LED</li>
-      <li><strong>LANGUAGE:</strong>C++, Arduino IDE</li>
-      <li><strong>STATUS:</strong>Passed</li>
-    </ul>
-    <div>
-      <img src="images/cd-off.jpg" alt="circuit-1" class="grid">
-      <img src="images/cd-on.jpg" alt="circuit-2" class="grid">
-    </div>
-    <br>
-        <iframe width="100%" height="315" src="https://www.youtube.com/embed/X93dzQ74K1g" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-        <p class="caption"><en><p class="caption"><em>Demonstrating condition-driven iteration in C++ using a while loop.
-           Unlike a deterministic for loop, execution continues indefinitely as long as the relational expression
-            evaluates to TRUE. The micro-controller executes the loop body and updates the evaluation variable internally on
-             each cycle, maintaining an output state until the test condition breaks.</em></p>
-</en></p>
+void loop() {
+  // put your main code here to run repeatedly:
+tilt=digitalRead(tilts);
+collect=analogRead(collector);
+vo=analogRead(trouble2);
+Serial.println(tilt);
+trouble=analogRead(troublePin);
+Serial.print("base= ");
+Serial.println(trouble);
+Serial.print("collector= ");
+ Serial.println(collect);
+Serial.print("volt= ");
+Serial.println(vo);
+if(tilt==0){
+pinMode(motorPin,OUTPUT);
+digitalWrite(green,HIGH);
+delay(dt);
+digitalWrite(green,LOW);
+delay(dt);
+analogWrite(motorPin,speed);
+}
 
+else if(tilt==1){
+pinMode(motorPin,OUTPUT);
+digitalWrite(blue,HIGH);
+delay(dt);
+digitalWrite(blue,LOW);
+delay(dt);
+analogWrite(motorPin,speed1);
+ }
 
-  </section>
+}
+    </code></pre>
+  </details>
 
+</section>
 
 
     </body>
